@@ -219,59 +219,29 @@
       transform: rotate(20deg) scale(1.1)
     }
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px
-    }
-
-    .hamburger span {
-      width: 22px;
-      height: 2.5px;
-      background: var(--text);
-      border-radius: 4px;
-      transition: var(--transition)
-    }
-
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px)
-    }
-
-    .hamburger.active span:nth-child(2) {
-      opacity: 0
-    }
-
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px)
-    }
-
     @media(max-width:900px) {
+      .navbar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: .6rem clamp(.8rem, 3vw, 2rem);
+        gap: .4rem
+      }
+
       .nav-links {
-        position: fixed;
-        top: var(--nav-h);
-        right: -100%;
-        width: 300px;
-        height: calc(100vh - var(--nav-h));
-        background: var(--glass);
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        flex-direction: column;
-        padding: 2.5rem;
-        gap: 1.8rem;
-        box-shadow: -8px 0 40px rgba(0, 0, 0, .1);
-        transition: right .4s cubic-bezier(.22, 1, .36, 1)
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: .8rem;
+        flex-wrap: wrap;
+        padding-bottom: .4rem
       }
 
-      .nav-links.open {
-        right: 0
+      .nav-links a {
+        font-size: .78rem
       }
 
-      .hamburger {
-        display: flex
+      .nav-sub {
+        display: none
       }
     }
 
@@ -1403,7 +1373,6 @@
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -1714,11 +1683,7 @@
       localStorage.setItem('theme', isDark ? 'light' : 'dark');
     });
 
-    /* ═══ HAMBURGER ═══ */
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('open') });
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); hamburger.classList.remove('active') }));
+
 
     /* ═══ PROGRESS BAR ═══ */
     window.addEventListener('scroll', () => { const h = document.documentElement; document.getElementById('progress').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%' });
